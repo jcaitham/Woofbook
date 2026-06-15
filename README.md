@@ -69,14 +69,18 @@ git push origin add-my-pet
 
 Open a PR on GitHub. A workflow will validate your entry. Once merged, your pet appears on the live site.
 
-**Do not edit `pets/manifest.json`** — it is generated automatically when the site is built.
+**Do not edit or commit `pets/manifest.json`** — it is generated automatically when the site is built and is listed in `.gitignore`.
 
 ## Run locally
 
+You need to build the manifest before the gallery will show pets:
+
 ```bash
-npm run build   # validate entries and regenerate pets/manifest.json
+npm run build   # validate entries and generate pets/manifest.json (local only)
 npm run serve   # open http://localhost:3000
 ```
+
+`pets/manifest.json` is not stored in git. GitHub Actions generates it on every deploy.
 
 ## Deploy to GitHub Pages
 
@@ -95,7 +99,7 @@ npm run serve   # open http://localhost:3000
 ├── pets/
 │   ├── entries/        # One JSON file per pet (you add these)
 │   ├── images/         # One photo per pet (you add these)
-│   └── manifest.json   # Generated — do not edit by hand
+│   └── manifest.json   # Generated locally / on deploy — gitignored
 ├── template/pet.json   # Copy this to get started
 └── scripts/
     └── build-manifest.js
