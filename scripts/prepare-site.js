@@ -64,7 +64,7 @@ async function prepareSite() {
   await rm(siteDir, { recursive: true, force: true });
   await mkdir(path.join(siteDir, "pets", "images"), { recursive: true });
 
-  for (const fileName of ["index.html", "app.js", "styles.css"]) {
+  for (const fileName of ["index.html", "app.js", "styles.css", ".nojekyll"]) {
     await copyIfExists(path.join(root, fileName), path.join(siteDir, fileName));
   }
 
