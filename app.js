@@ -35,8 +35,6 @@ function createPetCard(pet) {
         src="${image}"
         alt="Photo of ${name}"
         loading="lazy"
-        width="400"
-        height="300"
       />
     </div>
     <div class="pet-body">
