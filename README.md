@@ -100,6 +100,8 @@ If the site loads but shows **0 pets** while entries exist on `main`:
    ```
 3. Re-run **Actions → Deploy site → Run workflow** on `main`.
 
+**If `/pets/manifest.json` returns 404:** GitHub is likely deploying from the `main` branch instead of the Actions artifact. Either switch **Pages → Source** to **GitHub Actions**, or let the deploy workflow finish — it syncs a built `pets/manifest.json` back to `main` for branch-based deploys.
+
 ## Project layout
 
 ```text

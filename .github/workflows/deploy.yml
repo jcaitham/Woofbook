@@ -6,7 +6,7 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: read
+  contents: write
   pages: write
   id-token: write
 
@@ -16,6 +16,7 @@ concurrency:
 
 jobs:
   deploy:
+    if: ${{ !contains(github.event.head_commit.message, '[skip ci]') }}
     runs-on: ubuntu-latest
     environment:
       name: github-pages
@@ -29,6 +30,18 @@ jobs:
 
       - name: Build and stage site
         run: node scripts/prepare-site.js
+
+      - name: Sync manifest for branch-based Pages
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -f pets/manifest.json
+          if git diff --staged --quiet; then
+            echo "Manifest already up to date in git"
+          else
+            git commit -m "Update pets manifest [skip ci]"
+            git push
+          fi
 
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
