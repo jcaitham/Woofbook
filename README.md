@@ -9,8 +9,6 @@ A simple gallery where every pet is added through git: create a branch, open a p
 3. **Open a pull request**.
 4. When the PR is **merged**, GitHub Actions rebuilds the gallery and deploys it to GitHub Pages.
 
-No database, no admin panel — just files in git.
-
 ## Add your pet
 
 ### 1. Create a branch
@@ -53,7 +51,7 @@ Edit `pets/entries/your-github-username-pet-name.json`:
 
 | Field | Rules |
 | --- | --- |
-| `id` | Unique slug; must match the file name |
+| `id` | Unique id; must match the file name |
 | `name` | Your pet's name (max 60 characters) |
 | `description` | A short bio (max 280 characters) |
 | `contributor` | Your GitHub username or display name |
@@ -62,7 +60,7 @@ Edit `pets/entries/your-github-username-pet-name.json`:
 ### 5. Open a pull request
 
 ```bash
-git add pets/entries/your-github-username-pet-name.json pets/images/your-github-username-pet-name.jpg
+git add .
 git commit -m "Add Buddy the golden retriever"
 git push origin add-my-pet
 ```
@@ -77,13 +75,6 @@ Open a PR on GitHub. A workflow will validate your entry. Once merged, your pet 
 npm run build   # validate entries and regenerate pets/manifest.json
 npm run serve   # open http://localhost:3000
 ```
-
-## Deploy to GitHub Pages
-
-1. Push this repo to GitHub.
-2. Go to **Settings → Pages** and set **Source** to **GitHub Actions**.
-3. Replace `YOUR_USERNAME` in `index.html` with your GitHub username (or org name).
-4. Merges to `main` will deploy automatically.
 
 ## Project layout
 
