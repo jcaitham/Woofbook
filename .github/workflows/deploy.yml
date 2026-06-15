@@ -27,13 +27,13 @@ jobs:
         with:
           node-version: "20"
 
-      - name: Build pet manifest
-        run: npm run build
+      - name: Build and stage site
+        run: node scripts/prepare-site.js
 
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: .
+          path: _site
 
       - name: Deploy to GitHub Pages
         id: deployment

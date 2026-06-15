@@ -78,6 +78,28 @@ npm run build   # validate entries and generate pets/manifest.json (local only)
 npm run serve   # open http://localhost:3000
 ```
 
+`pets/manifest.json` is not stored in git. GitHub Actions generates it on every deploy.
+
+## Deploy to GitHub Pages
+
+1. Push this repo to GitHub.
+2. Go to **Settings → Pages → Build and deployment**.
+3. Set **Source** to **GitHub Actions** (not “Deploy from a branch”).
+4. Replace `YOUR_USERNAME` in `index.html` with your GitHub username (or org name).
+5. Merges to `main` run the **Deploy site** workflow automatically.
+
+### Troubleshooting an empty gallery
+
+If the site loads but shows **0 pets** while entries exist on `main`:
+
+1. **Pages source** must be **GitHub Actions**. Branch deploy serves the raw repo and skips `npm run build`, so an old committed `pets/manifest.json` (often `[]`) wins.
+2. **Delete `pets/manifest.json` from git** if it was committed before `.gitignore` was added:
+   ```bash
+   git rm --cached pets/manifest.json
+   git commit -m "Stop tracking generated manifest"
+   ```
+3. Re-run **Actions → Deploy site → Run workflow** on `main`.
+
 ## Project layout
 
 ```text
@@ -91,7 +113,8 @@ npm run serve   # open http://localhost:3000
 │   └── manifest.json   # Generated locally / on deploy — gitignored
 ├── template/pet.json   # Copy this to get started
 └── scripts/
-    └── build-manifest.js
+    ├── build-manifest.js
+    └── prepare-site.js
 ```
 
 ## License

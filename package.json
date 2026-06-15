@@ -5,6 +5,7 @@
   "scripts": {
     "build": "node scripts/build-manifest.js",
     "validate": "node scripts/build-manifest.js",
+    "prepare-site": "node scripts/prepare-site.js",
     "serve": "npx --yes serve ."
   }
 }
