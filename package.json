@@ -6,6 +6,8 @@
     "build": "node scripts/build-manifest.js",
     "validate": "node scripts/build-manifest.js",
     "prepare-site": "node scripts/prepare-site.js",
+    "stage-pet": "node scripts/contribution.js",
+    "check-staged": "node scripts/contribution.js --staged",
     "serve": "npx --yes serve ."
   }
 }

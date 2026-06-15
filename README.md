@@ -59,15 +59,23 @@ Edit `pets/entries/your-github-username-pet-name.json`:
 
 ### 5. Open a pull request
 
+Stage only your pet files (this skips the generated manifest):
+
 ```bash
-git add .
+npm run stage-pet -- your-github-username-pet-name
 git commit -m "Add Buddy the golden retriever"
 git push origin add-my-pet
 ```
 
-Open a PR on GitHub. A workflow will validate your entry. Once merged, your pet appears on the live site.
+Or stage manually:
 
-**Do not edit or commit `pets/manifest.json`** — it is generated automatically when the site is built and is listed in `.gitignore`.
+```bash
+git add pets/entries/your-github-username-pet-name.json pets/images/your-github-username-pet-name.jpg
+git commit -m "Add Buddy the golden retriever"
+git push origin add-my-pet
+```
+
+Open a PR on GitHub. CI validates your entry and rejects changes to the generated `pets/manifest.json`. Once merged, your pet appears on the live site.
 
 ## Run locally
 
@@ -78,7 +86,13 @@ npm run build   # validate entries and generate pets/manifest.json (local only)
 npm run serve   # open http://localhost:3000
 ```
 
-`pets/manifest.json` is not stored in git. GitHub Actions generates it on every deploy.
+`pets/manifest.json` is generated locally and on deploy. It is gitignored, rebuilt on merge, and rejected by CI if included in a pull request.
+
+Optional: enable the pre-commit hook so accidental manifest commits are blocked before you push:
+
+```bash
+git config core.hooksPath .githooks
+```
 
 ## Deploy to GitHub Pages
 
